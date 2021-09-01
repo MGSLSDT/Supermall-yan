@@ -19,7 +19,6 @@
 </template>
 
 <script>
-
 import DetailNavBar from "./childComps/DetailNavBar"
 import {getDetail, Goods, Shop, GoodsParam, getRecommend} from "../../network/detail"
 import DetailSwiper from "./childComps/DetailSwiper"
@@ -30,6 +29,7 @@ import DetailParamInfo from "./childComps/DetailParamInfo"
 import DetailCommentInfo from "./childComps/DetailCommentInfo"
 import DetailBottomBar from "./childComps/DetailBottomBar";
 import GoodsList from "components/content/goods/GoodsList"
+// import BackTop from "components/content/backTop/BackTop";
 import {itemImgListenerMixin, BackTopListenerMixin} from "common/mixin"
 // import Toast from "components/common/toast/Toast";   普通封装
 import {mapActions} from "vuex"
@@ -37,8 +37,6 @@ import {mapActions} from "vuex"
 import Scroll from "components/common/scroll/Scroll"
 
 import {debounce} from "common/utiles"
-
-
 export default {
   name: "Detail",
   components: {
@@ -52,8 +50,8 @@ export default {
     DetailBottomBar,
     Scroll,
     GoodsList,
+    // BackTop,
     // Toast
-
   },
   mixins: [itemImgListenerMixin, BackTopListenerMixin],
   data() {
@@ -71,7 +69,6 @@ export default {
       currentIndex: 0,
       // message:'',
       // isShow:false
-
     }
   },
   created() {
@@ -80,14 +77,13 @@ export default {
     this.iid = this.$route.params.iid
     //  第二步：根据id请求详情页数据
     getDetail(this.iid).then(res => {
-      console.log(res)
+      // console.log(res)
       //  1.获取顶部的图片轮播数据
       //   console.log(this.topImages)
       const data = res.result
       this.topImages = data.itemInfo.topImages
       //  2.获取商品信息
       this.goods = new Goods(data.itemInfo, data.columns, data.shopInfo.services)
-
       //  3.获取店铺信息
       this.shop = new Shop(data.shopInfo)
       //  4.保存商品详情数据
@@ -104,7 +100,8 @@ export default {
       // console.log(res)
       this.recommends = res.data.list
     })
-    //  第4步 给getThemeTopy赋值
+    //  第四步 给getThemeTopY赋值
+    //为什么要用防抖，是因为该函数是在图片加载完成后进行调用，会进行多次调用，为提高行性能，进行 debounce
     this.getThemeTopY = debounce(() => {
       this.themeTopYs = []
       this.themeTopYs.push(0);
@@ -112,9 +109,8 @@ export default {
       this.themeTopYs.push(this.$refs.comment.$el.offsetTop - 44)
       this.themeTopYs.push(this.$refs.recommend.$el.offsetTop - 44)
       this.themeTopYs.push(Number.MAX_VALUE)
-      // console.log(this.themeTopYs)
+      console.log(this.themeTopYs)
     }, 500)
-
   },
   mounted() {
     // console.log('我是混入中的内容')
@@ -132,7 +128,6 @@ export default {
   methods: {
     ...mapActions(['addCart']),
     addToCart() {
-
       //1.获取购物车需要展示的信息
       const product = {}
       product.image = this.topImages[0];
@@ -148,16 +143,7 @@ export default {
       // })
       //使用vuex的mapActions，将actions中的方法映射到methods中，看起来像是调用自己方法
       this.addCart(product).then(res => {
-        // console.log(res)
-        // this.isShow = true
-        // this.message = res
-        //
-        // setTimeout(()=>{
-        //   this.isShow = false
-        //   this.message = " "
-        // },1000)
-        // this.$toast.show(res, 2000)
-        this.$toast.show()
+        this.$toast.show(res, 2000)
       })
 
     },
@@ -169,6 +155,7 @@ export default {
       // console.log(index)
       this.$refs.scroll.scrollTo(0, -this.themeTopYs[index], 200)
     },
+
     contentScroll(position) {
       //1.判断backTop是否显示
       this.isShowBackTop = -position.y > 1200

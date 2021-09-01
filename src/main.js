@@ -7,6 +7,10 @@ import FastClick from "fastclick"
 import VueLazyload from "vue-lazyload";
 
 Vue.config.productionTip = false
+
+// 添加事件总线对象
+Vue.prototype.$bus= new Vue()
+
 // 安装toast插件
 Vue.use(toast);
 
@@ -16,8 +20,6 @@ FastClick.attach(document.body)
 Vue.use(VueLazyload,{
   loading:require('./assets/img/common/placeholder.png')
 })
-// 添加事件总线对象
-Vue.prototype.$bus= new Vue()
 
 new Vue({
   render: h => h(App),

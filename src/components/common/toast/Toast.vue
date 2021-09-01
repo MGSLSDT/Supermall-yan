@@ -3,21 +3,9 @@
   <div >{{message}}</div>
 </div>
 </template>
-
 <script>
 export default {
   name: "Toast",
-  // props:{
-  //   message:{
-  //     type:String,
-  //     default:''
-  //   },
-  //   isShow:{
-  //     type:Boolean,
-  //     default: false
-  //   }
-  //
-  // },
   data() {
     return {
       isShow: false,
@@ -28,12 +16,10 @@ export default {
     show(message="默认值",duration = 1500){
       //设置默认值
       // message = message||'商品添加成功';  如果有message就显示message，没有的话显示商品添加成功  message="默认值",duration = 1500是es6
-      用法
+      // 用法
       // duration = duration || 1500;
-
       this.isShow = true;
       this.message = message;
-
       setTimeout(()=>{
         this.isShow = false
         this.message = " "
@@ -52,6 +38,7 @@ export default {
   transform: translate(-50%,-50%);
   color: #fff;
   background-color: rgba(0,0,0,0.75);
-  z-index:999
+  z-index:999;
+  border-radius: 8px;
 }
 </style>

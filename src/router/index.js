@@ -1,16 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
 const Home = () => import('../views/home/Home')
 const Category = () => import('../views/category/Category')
 const Profile = () => import('../views/profile/Profile')
 const Cart = () => import('../views/cart/Cart')
 const Detail = () => import('../views/detail/Detail')
-
 //1.安装
 Vue.use(VueRouter)
-
-
 //2.创建路由对象
 const routes=[
   {

@@ -12,9 +12,7 @@ export const itemImgListenerMixin = {
       refresh()
     }
     this.$bus.$on('ItemImageLoad', this.itemImgListener)
-    // console.log('我是混入中的内容')
   }
-
 }
 
 export const BackTopListenerMixin ={

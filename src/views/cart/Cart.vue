@@ -5,15 +5,11 @@
   <div slot="center">购物车({{cartLength}})</div>
 <!--<div slot="center">购物车({{$store.state.cartList.length}})</div>-->
   </nav-bar>
-
 <!-- 商品list-->
   <cart-list></cart-list>
 
 <!-- 底部汇总-->
-
   <cart-bottom-bar></cart-bottom-bar>
-
-
 </div>
 </template>
 

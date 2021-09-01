@@ -1,10 +1,9 @@
 <template>
 <div class="bottom-bar">
   <div class="check-content">
-    <check-button
-      class="check-button"
-      :is-checked="isSelectAll"
-      @click.native="checkClick"></check-button>
+    <check-button class="check-button"
+                  :is-checked="isSelectAll"
+                  @click.native="checkClick"></check-button>
     <span>全选</span>
   </div>
   <div class="price">
@@ -30,6 +29,7 @@ export default {
       }).reduce((preValue, item) => {
         return preValue + item.price * item.count
       }, 0).toFixed(2)
+    //  reduce方法是累加器
     },
     checkLength() {
       return this.$store.state.cartList.filter(item => item.checked).length
@@ -51,12 +51,11 @@ export default {
       }
       return true
 
-    //关于return true位置不懂
+
     }
   },
   methods:{
     checkClick(){
-
       if (this.isSelectAll){//全部选中
         this.cartList.forEach(item=>item.checked=false)
       } else { //全不选中或者部分选中

@@ -28,7 +28,7 @@ export default {
   components:{
     NavBar
   },
- methods:{
+  methods:{
    titleClick(index){
      this.currentIndex = index
      this.$emit('titleClick', index)

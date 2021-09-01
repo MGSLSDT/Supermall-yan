@@ -22,7 +22,8 @@ export default {
   },
   data(){
     return {
-      isLoad:false
+      isLoad:false,
+    //  记录是否emit过
     }
   },
   components:{
@@ -31,10 +32,11 @@ export default {
   },
   methods:{
     imageLoad() {
-      // if (!this.isLoad) {
+      if (!this.isLoad) {
         this.$emit('swiperImageLoad')
-        // this.isLoad = ture
-      // }
+        this.isLoad = true
+        // this.isLoad 状态改为true控制 只发送一次emit
+      }
     }
 
     }

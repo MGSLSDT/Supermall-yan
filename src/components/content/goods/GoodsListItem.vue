@@ -40,12 +40,12 @@ export default {
     },
 
     itemClick(){
+      //这里要用push 不用replace  因为还要从详情页返回首页
       this.$router.push('/detail/'+this.goodsItem.iid)
     }
   }
 }
 </script>
-
 
 <style scoped>
 .goods-item {

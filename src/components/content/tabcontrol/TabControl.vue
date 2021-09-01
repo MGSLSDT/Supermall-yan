@@ -1,6 +1,9 @@
 <template>
 <div class="tab-control">
-  <div v-for="(item,index) in titles" class="tab-control-item" :class="{active:index === currentIndex}" @click="itemClick(index)">
+  <div v-for="(item,index) in titles"
+       class="tab-control-item"
+       :class="{active:index === currentIndex}"
+       @click="itemClick(index)">
     <span>{{item}}</span>
   </div>
 </div>
@@ -14,6 +17,7 @@ export default {
       type:Array,
       default(){
         return []
+      //  当值是对象或者数组时候,default默认是函数
       }
     }
   },

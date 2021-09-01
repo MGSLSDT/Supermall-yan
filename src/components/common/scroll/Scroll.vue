@@ -1,5 +1,6 @@
 <template>
 <div class="wrapper" ref="wrapper">
+<!--  里面必须是一个东西包裹(全部)-->
   <div class="content">
     <slot></slot>
   </div>
@@ -21,8 +22,8 @@ export default {
     }
   },
   data(){
-return{
-  scroll:null
+      return{
+      scroll:null
     }
   },
   mounted() {
@@ -44,19 +45,15 @@ return{
         //  谁想用传给谁
         this.$emit('scroll',position)
       })
-
     }
-
-
   //  3.监听上拉事件
   //  if(this.pullUpload){
      this.scroll.on('pullingUp',()=>{
        // console.log('监听滚动到底部')
        this.$emit('pullingUp' )
-
      })
-   },
-  // },
+   // }
+  },
   methods:{
     scrollTo(x,y,time=500){
       this.scroll && this.scroll.scrollTo(x,y*1)
